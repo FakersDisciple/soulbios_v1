@@ -1,0 +1,21 @@
+# This file tells gcloud what NOT to upload.
+# This will make the deployment fast.
+
+# Python build artifacts and virtual environments
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Local data, secrets, and environment files
+.env
+data/
+chroma_db/
+
+# Git and IDE configuration
+.git/
+.vscode/
+
+# Other non-essential files
+*.md
+tests/

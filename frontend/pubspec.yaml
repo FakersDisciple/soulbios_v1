@@ -1,0 +1,47 @@
+name: encarta_soulbios
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+  flutter: ">=3.24.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.1.0
+  flutter_riverpod: ^2.4.0
+  intl: ^0.18.1
+  http: ^1.1.0
+  dio: ^5.4.0
+  file_picker: ^8.0.0+1
+  speech_to_text: ^6.6.0
+  graphview: ^1.2.0
+  health: ^13.1.4
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  # flutter_secure_storage: ^9.2.2  # Temporarily disabled for web testing
+  path_provider: ^2.1.3
+  firebase_core: ^2.24.0
+  firebase_analytics: ^10.6.0
+  firebase_crashlytics: ^3.4.0
+  firebase_performance: ^0.9.3
+  survey_kit: ^0.1.1
+  cached_network_image: ^3.3.1
+  purchases_flutter: ^6.29.7
+  lottie: ^2.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.9
+  golden_toolkit: ^0.15.0
+
+flutter:
+  uses-material-design: true

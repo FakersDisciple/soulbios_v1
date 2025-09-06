@@ -1,0 +1,325 @@
+{
+  "dashboard_name": "SoulBios Production Monitoring",
+  "version": "1.0.0",
+  "created_date": "2025-08-31",
+  "description": "Comprehensive monitoring dashboard for SoulBios production deployment",
+  
+  "backend_monitoring": {
+    "vercel_metrics": {
+      "response_time": {
+        "threshold_warning": 500,
+        "threshold_critical": 1000,
+        "unit": "milliseconds"
+      },
+      "error_rate": {
+        "threshold_warning": 5,
+        "threshold_critical": 10,
+        "unit": "percentage"
+      },
+      "throughput": {
+        "threshold_warning": 100,
+        "threshold_critical": 50,
+        "unit": "requests_per_minute"
+      },
+      "memory_usage": {
+        "threshold_warning": 80,
+        "threshold_critical": 95,
+        "unit": "percentage"
+      }
+    },
+    "endpoints_to_monitor": [
+      {
+        "path": "/health",
+        "method": "GET",
+        "expected_status": 200,
+        "timeout": 5000
+      },
+      {
+        "path": "/chat",
+        "method": "POST",
+        "expected_status": 200,
+        "timeout": 10000
+      },
+      {
+        "path": "/users/{user_id}/analyze",
+        "method": "POST",
+        "expected_status": 200,
+        "timeout": 8000
+      },
+      {
+        "path": "/generate/image",
+        "method": "POST",
+        "expected_status": 200,
+        "timeout": 30000
+      },
+      {
+        "path": "/upload/lifebook",
+        "method": "POST",
+        "expected_status": 200,
+        "timeout": 60000
+      }
+    ]
+  },
+  
+  "frontend_monitoring": {
+    "firebase_analytics": {
+      "key_events": [
+        "app_launch",
+        "chamber_unlock",
+        "memory_capture",
+        "pattern_discovery",
+        "alice_conversation",
+        "image_generation",
+        "premium_upgrade",
+        "survey_completed"
+      ],
+      "user_properties": [
+        "consciousness_level",
+        "premium_status",
+        "chambers_unlocked",
+        "patterns_discovered",
+        "days_active"
+      ]
+    },
+    "firebase_performance": {
+      "traces": [
+        "app_startup",
+        "chamber_load",
+        "pattern_analysis",
+        "memory_timeline_load",
+        "image_generation",
+        "alice_response"
+      ],
+      "network_requests": [
+        "chat_api",
+        "analyze_api",
+        "image_api",
+        "upload_api"
+      ]
+    },
+    "firebase_crashlytics": {
+      "custom_keys": [
+        "user_id",
+        "consciousness_level",
+        "current_chamber",
+        "premium_status",
+        "app_version"
+      ],
+      "breadcrumbs": [
+        "chamber_entry",
+        "pattern_discovery",
+        "alice_interaction",
+        "memory_capture",
+        "image_generation"
+      ]
+    }
+  },
+  
+  "alerts": {
+    "critical": [
+      {
+        "name": "Backend Down",
+        "condition": "health_check_failure > 2 consecutive",
+        "notification": ["email", "slack"],
+        "escalation_time": 300
+      },
+      {
+        "name": "High Error Rate",
+        "condition": "error_rate > 10% for 5 minutes",
+        "notification": ["email", "slack"],
+        "escalation_time": 600
+      },
+      {
+        "name": "App Crash Rate High",
+        "condition": "crash_rate > 5% for 1 hour",
+        "notification": ["email"],
+        "escalation_time": 1800
+      }
+    ],
+    "warning": [
+      {
+        "name": "Slow Response Time",
+        "condition": "avg_response_time > 500ms for 10 minutes",
+        "notification": ["slack"],
+        "escalation_time": 1800
+      },
+      {
+        "name": "Memory Usage High",
+        "condition": "memory_usage > 80% for 15 minutes",
+        "notification": ["slack"],
+        "escalation_time": 3600
+      },
+      {
+        "name": "Low User Engagement",
+        "condition": "daily_active_users < 50% of 7-day average",
+        "notification": ["email"],
+        "escalation_time": 86400
+      }
+    ]
+  },
+  
+  "dashboards": {
+    "operational": {
+      "name": "SoulBios Operations Dashboard",
+      "widgets": [
+        {
+          "type": "metric",
+          "title": "Backend Health",
+          "query": "health_check_status",
+          "visualization": "status_indicator"
+        },
+        {
+          "type": "metric",
+          "title": "Response Time",
+          "query": "avg_response_time_5m",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Error Rate",
+          "query": "error_rate_5m",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Active Users",
+          "query": "active_users_1h",
+          "visualization": "number"
+        },
+        {
+          "type": "metric",
+          "title": "API Calls per Minute",
+          "query": "api_calls_1m",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "log",
+          "title": "Recent Errors",
+          "query": "level:ERROR",
+          "limit": 10
+        }
+      ]
+    },
+    "user_analytics": {
+      "name": "SoulBios User Analytics",
+      "widgets": [
+        {
+          "type": "metric",
+          "title": "Daily Active Users",
+          "query": "firebase_analytics.daily_active_users",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Chamber Completions",
+          "query": "firebase_analytics.chamber_unlock",
+          "visualization": "bar_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Premium Conversions",
+          "query": "firebase_analytics.premium_upgrade",
+          "visualization": "funnel"
+        },
+        {
+          "type": "metric",
+          "title": "User Retention",
+          "query": "firebase_analytics.user_retention",
+          "visualization": "cohort_table"
+        },
+        {
+          "type": "metric",
+          "title": "Feature Usage",
+          "query": "firebase_analytics.feature_usage",
+          "visualization": "pie_chart"
+        }
+      ]
+    },
+    "performance": {
+      "name": "SoulBios Performance Dashboard",
+      "widgets": [
+        {
+          "type": "metric",
+          "title": "App Startup Time",
+          "query": "firebase_performance.app_startup",
+          "visualization": "histogram"
+        },
+        {
+          "type": "metric",
+          "title": "Chamber Load Time",
+          "query": "firebase_performance.chamber_load",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "API Response Times",
+          "query": "firebase_performance.network_requests",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Memory Usage",
+          "query": "system_metrics.memory_usage",
+          "visualization": "line_chart"
+        },
+        {
+          "type": "metric",
+          "title": "Frame Rate",
+          "query": "firebase_performance.frame_rate",
+          "visualization": "line_chart"
+        }
+      ]
+    }
+  },
+  
+  "sla_targets": {
+    "availability": {
+      "target": 99.9,
+      "measurement_period": "monthly"
+    },
+    "response_time": {
+      "target": 500,
+      "percentile": 95,
+      "measurement_period": "daily"
+    },
+    "error_rate": {
+      "target": 1,
+      "measurement_period": "daily"
+    },
+    "crash_rate": {
+      "target": 1,
+      "measurement_period": "daily"
+    }
+  },
+  
+  "data_retention": {
+    "metrics": "90 days",
+    "logs": "30 days",
+    "traces": "7 days",
+    "user_analytics": "2 years"
+  },
+  
+  "integrations": {
+    "vercel": {
+      "api_endpoint": "https://api.vercel.com/v1",
+      "metrics_collection": true,
+      "log_streaming": true
+    },
+    "firebase": {
+      "project_id": "soulbios-prod",
+      "analytics": true,
+      "crashlytics": true,
+      "performance": true
+    },
+    "notifications": {
+      "email": {
+        "enabled": true,
+        "recipients": ["team@soulbios.app"]
+      },
+      "slack": {
+        "enabled": true,
+        "webhook_url": "https://hooks.slack.com/services/..."
+      }
+    }
+  }
+}

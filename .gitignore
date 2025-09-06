@@ -1,0 +1,21 @@
+# Python build artifacts and virtual environments
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Local data and secrets
+# IMPORTANT: Never commit your actual .env file
+.env
+config/.env
+/data/
+/chroma_db/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Deployment and backup files
+Dockerfile.backup
+runtime.txt

@@ -1,0 +1,7 @@
+postgresql+asyncpg://postgres:Your-Super-Secret-Password-Here@/postgres?host=/cloudsql/gen-lang-client-033970220301:us-central1:soulbios-db-v1
+
+postgresql+asyncpg://postgres:YH$8(CqdQoaBRYeg @/soulbios-db-v1?host=/cloudsql/gen-lang-client-033970220301:us-central1:soulbios-db-v1
+
+ ```bash
+ printf postgresql+asyncpg://postgres:YH$8(CqdQoaBRYeg @/soulbios-db-v1?host=/cloudsql/gen-lang-client-033970220301:us-central1:soulbios-db-v1 | gcloud secrets create database-url --data-file=-
+ ```

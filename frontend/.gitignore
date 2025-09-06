@@ -1,0 +1,36 @@
+# IDE files
+.idea/
+.vscode/
+*.iml
+.kiro/
+.metadata/
+.prompt_attachments/
+
+# Build artifacts
+build/
+*.apk
+*.ipa
+*.dmg
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+
+# Node.js
+node_modules/
+
+# macOS
+.DS_Store
+
+# General
+*.log
+
+# Dart/Flutter
+.dart_tool/
+ios/Podfile.lock
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+windows/flutter/generated_plugins.cmake
