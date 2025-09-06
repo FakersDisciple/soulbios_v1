@@ -462,6 +462,12 @@ class StrategizeRequest(BaseModel):
     prompt: Optional[str] = None
     prompts: Optional[List[str]] = None
 
+class EnhancedChatRequest(BaseModel):
+    user_id: str
+    conversation_id: str
+    message: str
+    context: Optional[Dict[str, Any]] = None
+
 @app.get("/", summary="Health Check")
 async def root():
     return {"service": "SoulBios Consciousness API", "status": "operational", "version": "2.1.0"}
@@ -701,6 +707,63 @@ async def get_berghain_strategy(
         processing_time = int((time.time() - start_time) * 1000)
         logger.error(f"❌ CRITICAL: Optimal Berghain Pipeline failure after {processing_time}ms: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Strategic pipeline failure: {str(e)}")
+
+@app.post("/v1/chat", summary="General purpose chat with the SoulBios consciousness")
+async def chat(
+    request: EnhancedChatRequest,
+    api_key: str = Depends(verify_chat_rate_limit)
+):
+    """
+    Enhanced general-purpose chat endpoint for SoulBios consciousness interaction.
+    
+    Features:
+    - Full CloudStudentAgent orchestration
+    - Multi-agent parallel processing
+    - Context-aware conversation management
+    - High-performance response generation
+    """
+    start_time = time.time()
+    
+    if not cloud_student_agent:
+        logger.error("❌ CloudStudentAgent not initialized - critical system failure")
+        raise HTTPException(status_code=503, detail="Orchestrator offline - system initializing")
+
+    try:
+        logger.info(f"💬 Processing chat request for user {request.user_id} in conversation {request.conversation_id}")
+        
+        # Import the AgentRequest class
+        from agents.base_agent import AgentRequest
+        
+        # Create optimized agent request for general chat processing
+        agent_req = AgentRequest(
+            user_id=request.user_id,
+            conversation_id=request.conversation_id,
+            message=request.message,
+            context=request.context or {},
+            timestamp=datetime.now()
+        )
+        
+        # Execute through CloudStudentAgent orchestration
+        response = await cloud_student_agent.process_request(agent_req)
+        
+        if not response or not response.message:
+            logger.error("❌ CloudStudentAgent returned null/empty response")
+            raise HTTPException(status_code=500, detail="Chat processing failure - no response from orchestrator")
+        
+        # Calculate performance metrics
+        processing_time_ms = int((time.time() - start_time) * 1000)
+        
+        logger.info(f"✅ Chat processed successfully: {processing_time_ms}ms")
+        
+        # Return the agent response directly (it's already structured)
+        return response
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        processing_time_ms = int((time.time() - start_time) * 1000)
+        logger.error(f"❌ Chat processing error after {processing_time_ms}ms: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Chat failed: {str(e)}")
 
 @app.post("/upload/lifebook", summary="Upload Lifebook Document (Authenticated)")
 async def upload_lifebook(
